@@ -22,7 +22,7 @@ def depthwise_conv_layer(x, filters, stride=1, depth_multiplier=1):
     return x
 
 
-def mobilenet_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
+def mobilenet_vitis(input_tensor=None, alpha = 1.0,depth_multiplier=1, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
     """_summary_
     Args:
         alpha (float, optional): controls the width of the network.
@@ -74,7 +74,7 @@ def mobilenet_vitis(input_tensor=None, include_top=True, weight_path=None, retur
         if weight_path is not None:
             model.load_weights(weight_path)
             if return_tensor is True:
-            print('loading of pretrained weights only supported through the model API. Set return_tensor to False, load the weights, and extract the required layer manually from the returned model')
+                print('loading of pretrained weights only supported through the model API. Set return_tensor to False, load the weights, and extract the required layer manually from the returned model')
 
 
         return model 

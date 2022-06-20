@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-def vgg19_vitis(input_tensor,include_top=True, weight_path=None, classes=1000, classifier_activation="softmax"):
+def vgg19_vitis(input_tensor=None,include_top=True, weight_path=None,return_tensor=False, classes=1000, classifier_activation="softmax"):
     
     if input_tensor is None:
         input_tensor = tf.keras.layers.Input(shape=(224,224,3))
@@ -37,7 +37,7 @@ def vgg19_vitis(input_tensor,include_top=True, weight_path=None, classes=1000, c
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dense(4096, activation='relu')(x)
         x = tf.keras.layers.Dense(4096, activation='relu')(x)
-        x = tf.keras.layers.Dense(1000, activation=softmax, name="predictions")(x)
+        x = tf.keras.layers.Dense(1000, activation="softmax", name="predictions")(x)
         #return tf.keras.Model(input_tensor, new_outputs)
 
     if return_tensor:

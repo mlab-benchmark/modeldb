@@ -73,7 +73,7 @@ def densenet201_vitis(input_tensor=None, include_top=True, weight_path=None, ret
         if weight_path is not None:
             model.load_weights(weight_path)
             if return_tensor is True:
-            print('loading of pretrained weights only supported through the model API. Set return_tensor to False, load the weights, and extract the required layer manually from the returned model')
+                print('loading of pretrained weights only supported through the model API. Set return_tensor to False, load the weights, and extract the required layer manually from the returned model')
 
 
         return model

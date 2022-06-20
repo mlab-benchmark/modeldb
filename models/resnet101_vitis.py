@@ -67,7 +67,7 @@ def bottleneck_block(x, filters, stride=1, option_b=False):
 
 def resnet101_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
 
-     if input_tensor is None:
+    if input_tensor is None:
         input_tensor = tf.keras.layers.Input(shape=(224,224,3))
     
     x = tf.keras.layers.ZeroPadding2D()(input_tensor)

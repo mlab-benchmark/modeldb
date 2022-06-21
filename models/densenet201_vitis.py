@@ -34,7 +34,8 @@ def transition_layer(x, filters,strides=1, compression=0.5):
     return x
 
 
-def densenet201_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
+def densenet201_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax", grow_rate=32, compression=0.5, kernel_size_first_layer=(7,7)):
+
     if input_tensor is None:
         input_tensor = tf.keras.layers.Input(shape=(224,224,3))
 
@@ -59,21 +60,22 @@ def densenet201_vitis(input_tensor=None, include_top=True, weight_path=None, ret
 
     x = tf.keras.layers.BatchNormalization()(x)
     x = tf.keras.layers.Activation(tf.nn.relu)(x)
-    
+
     if include_top is True:
         x = tf.keras.layers.GlobalAveragePooling2D()(x)
-        #x = tf.keras.layers.Flatten()(x)
-        #new_outputs = tf.keras.layers.Dense(number_of_classes, activation='softmax')(x)
-        #return tf.keras.Model(input_tensor, new_outputs)
+        x = tf.keras.layers.Flatten()(x)
+        x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
+
+        if return_tensor:
+            return x
+
+        return tf.keras.Model(input_tensor, x, name="densenet201")
 
     if return_tensor:
         return x
-    else:
-        model = tf.keras.Model(input_tensor, x)
-        if weight_path is not None:
-            model.load_weights(weight_path)
-            if return_tensor is True:
-                print('loading of pretrained weights only supported through the model API. Set return_tensor to False, load the weights, and extract the required layer manually from the returned model')
+    
+    model = tf.keras.Model(input_tensor, x, name="densenet201")
+    if weight_path is not None:
+        model.load_weights(weight_path)
 
-
-        return model
+    return model

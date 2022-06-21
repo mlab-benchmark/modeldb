@@ -121,14 +121,18 @@ def resnet101_vitis(input_tensor=None, include_top=True, weight_path=None, retur
     if include_top is True:
         x = tf.keras.layers.GlobalAveragePooling2D()(x)
         x = tf.keras.layers.Flatten()(x)
-        #new_outputs = tf.keras.layers.Dense(number_of_classes, activation='softmax')(x)
-        #return tf.keras.Model(input_tensor, new_outputs)
+        x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
+
+        if return_tensor:
+            return x
+
+        return tf.keras.Model(input_tensor, x, name="resnet101")
 
     if return_tensor:
         return x
-    else:
-        model = tf.keras.Model(input_tensor, x)
-        if weight_path is not None:
-            model.load_weights(weight_path)
+    
+    model = tf.keras.Model(input_tensor, x, name="resnet101")
+    if weight_path is not None:
+        model.load_weights(weight_path)
 
-        return model 
+    return model

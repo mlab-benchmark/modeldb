@@ -100,21 +100,21 @@ def resnet50_vitis(input_tensor=None, include_top=True, weight_path=None, return
     x = bottleneck_block(x, 512)
     x = bottleneck_block(x, 512)
     
-
     if include_top is True:
         x = tf.keras.layers.GlobalAveragePooling2D()(x)
         x = tf.keras.layers.Flatten()(x)
-        #new_outputs = tf.keras.layers.Dense(number_of_classes, activation='softmax')(x)
-        #return tf.keras.Model(input_tensor, new_outputs)
+        x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
+
+        if return_tensor:
+            return x
+
+        return tf.keras.Model(input_tensor, x, name="resnet50")
 
     if return_tensor:
         return x
-    else:
-        model = tf.keras.Model(input_tensor, x)
-        if weight_path is not None:
-            model.load_weights(weight_path)
-            if return_tensor is True:
-                print('loading of pretrained weights only supported through the model API. Set return_tensor to False, load the weights, and extract the required layer manually from the returned model')
+    
+    model = tf.keras.Model(input_tensor, x, name="resnet50")
+    if weight_path is not None:
+        model.load_weights(weight_path)
 
-
-        return model
+    return model

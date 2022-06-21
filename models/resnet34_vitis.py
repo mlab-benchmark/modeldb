@@ -15,7 +15,7 @@ def residual_block(x, filters, stride=1):
 
     skip = tf.keras.layers.Conv2D(filters, kernel_size=(3,3), strides=(stride,stride), padding='same')(x)
     skip = tf.keras.layers.BatchNormalization()(skip)
-    skip = tf.keras.layers.Activation(tf.nn.relu)(skip)
+    skip = tf.keras.layers.ReLU()(skip)
 
     skip = tf.keras.layers.Conv2D(filters, kernel_size=(3,3), padding='same')(skip)
     skip = tf.keras.layers.BatchNormalization()(skip)
@@ -27,7 +27,7 @@ def residual_block(x, filters, stride=1):
     
     out = tf.keras.layers.Add()([x,skip])
     out = tf.keras.layers.BatchNormalization()(out)
-    out = tf.keras.layers.Activation(tf.nn.relu)(out)
+    out = tf.keras.layers.ReLU()(out)
 
     return out
 
@@ -65,7 +65,7 @@ def bottleneck_block(x, filters, stride=1, option_b=False):
     return out
 
 
-def resnet152_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
+def resnet34_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
 
     if input_tensor is None:
         input_tensor = tf.keras.layers.Input(shape=(224,224,3))
@@ -78,62 +78,28 @@ def resnet152_vitis(input_tensor=None, include_top=True, weight_path=None, retur
     x = tf.keras.layers.MaxPool2D((3, 3), strides=(2, 2), padding='same')(x)
 
     # conv2_x
-    x = bottleneck_block(x, 64, option_b=True)
-    x = bottleneck_block(x, 64)
-    x = bottleneck_block(x, 64)
+    x = residual_block(x, 64)
+    x = residual_block(x, 64)
+    x = residual_block(x, 64)
 
     # conv3_x
-    x = bottleneck_block(x, 128, 2, option_b=True)
-    x = bottleneck_block(x, 128)
-    x = bottleneck_block(x, 128)
-    x = bottleneck_block(x, 128)
-    x = bottleneck_block(x, 128) # 5
-    x = bottleneck_block(x, 128)
-    x = bottleneck_block(x, 128)
-    x = bottleneck_block(x, 128)
+    x = residual_block(x, 128, 2)
+    x = residual_block(x, 128)
+    x = residual_block(x, 128)
+    x = residual_block(x, 128)
 
     # conv4_x
-    x = bottleneck_block(x, 256, 2, option_b=True)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 5
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 10
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 15
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 20
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 25
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 30
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256)
-    x = bottleneck_block(x, 256) # 35
-    x = bottleneck_block(x, 256)
+    x = residual_block(x, 256, 2)
+    x = residual_block(x, 256)
+    x = residual_block(x, 256)
+    x = residual_block(x, 256)
+    x = residual_block(x, 256)
+    x = residual_block(x, 256)
 
     # conv5_x
-    x = bottleneck_block(x, 512, 2, option_b=True)
-    x = bottleneck_block(x, 512)
-    x = bottleneck_block(x, 512)
+    x = residual_block(x, 512, 2)
+    x = residual_block(x, 512)
+    x = residual_block(x, 512)
     
     if include_top is True:
         x = tf.keras.layers.GlobalAveragePooling2D()(x)
@@ -143,12 +109,12 @@ def resnet152_vitis(input_tensor=None, include_top=True, weight_path=None, retur
         if return_tensor:
             return x
 
-        return tf.keras.Model(input_tensor, x, name="resnet152")
+        return tf.keras.Model(input_tensor, x, name="resnet34")
 
     if return_tensor:
         return x
     
-    model = tf.keras.Model(input_tensor, x, name="resnet152")
+    model = tf.keras.Model(input_tensor, x, name="resnet34")
     if weight_path is not None:
         model.load_weights(weight_path)
 

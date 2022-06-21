@@ -6,7 +6,7 @@ hardware constraints of the Vitis AI framework for inference on Xilinx FPGAs.
 Pretrained weights are available from the model database as followss
 
 - **imagenet_densenet121.h5:** /weights/imagenet_densenet121.h5 
-- **imagenet_densenet121_notop.h5:** /weights/imagenet_densenet121_notop.h5
+- **imagenet_densenet121_notop.h5:** /weights/imagenet_densenet121_notop.h5 
 
 
 ## References:

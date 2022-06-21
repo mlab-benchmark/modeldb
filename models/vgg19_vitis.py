@@ -1,11 +1,9 @@
 import tensorflow as tf
 
-def vgg19_vitis(input_tensor=None,include_top=True, weight_path=None,return_tensor=False, classes=1000, classifier_activation="softmax"):
+def vgg19_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
     
     if input_tensor is None:
         input_tensor = tf.keras.layers.Input(shape=(224,224,3))
-    
-    
     
     x = tf.keras.layers.Conv2D(filters =64, kernel_size=3, strides=(1, 1), padding='same', activation='relu')(input_tensor)
     x = tf.keras.layers.Conv2D(filters =64, kernel_size=3, strides=(1, 1), padding='same', activation='relu')(x)
@@ -37,14 +35,18 @@ def vgg19_vitis(input_tensor=None,include_top=True, weight_path=None,return_tens
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dense(4096, activation='relu')(x)
         x = tf.keras.layers.Dense(4096, activation='relu')(x)
-        x = tf.keras.layers.Dense(1000, activation="softmax", name="predictions")(x)
-        #return tf.keras.Model(input_tensor, new_outputs)
+        x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
+
+        if return_tensor:
+            return x
+
+        return tf.keras.Model(input_tensor, x, name="vgg19")
 
     if return_tensor:
         return x
-    else:
-        model = tf.keras.Model(input_tensor, x)
-        if weight_path is not None:
-            model.load_weights(weight_path)
+    
+    model = tf.keras.Model(input_tensor, x, name="vgg19")
+    if weight_path is not None:
+        model.load_weights(weight_path)
 
-        return model
+    return model

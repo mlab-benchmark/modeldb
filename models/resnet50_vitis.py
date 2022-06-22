@@ -105,11 +105,6 @@ def resnet50_vitis(input_tensor=None, include_top=True, weight_path=None, return
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
 
-        if return_tensor:
-            return x
-
-        return tf.keras.Model(input_tensor, x, name="resnet50")
-
     if return_tensor:
         return x
     

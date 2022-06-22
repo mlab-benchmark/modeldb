@@ -35,11 +35,6 @@ def vgg16_vitis(input_tensor=None, include_top=True, weight_path=None, return_te
         x = tf.keras.layers.Dense(4096, activation='relu')(x)
         x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
 
-        if return_tensor:
-            return x
-
-        return tf.keras.Model(input_tensor, x, name="vgg16")
-
     if return_tensor:
         return x
     

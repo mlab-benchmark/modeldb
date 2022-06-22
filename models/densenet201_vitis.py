@@ -66,11 +66,6 @@ def densenet201_vitis(input_tensor=None, include_top=True, weight_path=None, ret
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dense(classes, activation=classifier_activation, name="predictions")(x)
 
-        if return_tensor:
-            return x
-
-        return tf.keras.Model(input_tensor, x, name="densenet201")
-
     if return_tensor:
         return x
     

@@ -27,7 +27,7 @@ def dense_block(x,filters,strides=1, bottleneck=True):
 def transition_layer(x, filters,strides=1, compression=0.5):
     x = tf.keras.layers.BatchNormalization()(x)
     x = tf.keras.layers.Activation(tf.nn.relu)(x)
-    x = tf.keras.layers.Conv2D((x.shape[-1])*compression, kernel_size=(1,1), strides=strides, padding='same', use_bias=False)(x) 
+    x = tf.keras.layers.Conv2D(int(int(x.shape[-1])*compression), kernel_size=(1,1), strides=strides, padding='same', use_bias=False)(x) 
 
     x = tf.keras.layers.AvgPool2D(2, strides = 2, padding = 'same')(x)
 

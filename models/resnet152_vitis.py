@@ -66,6 +66,19 @@ def bottleneck_block(x, filters, stride=1, option_b=False):
 
 
 def resnet152_vitis(input_tensor=None, include_top=True, weight_path=None, return_tensor=False, classes=1000, classifier_activation="softmax"):
+    """Creates and returns the ResNet152 CNN architecture.
+
+    Args:
+        input_tensor: optional keras layer, like an input tensor.
+        include_top: whether to include the top layers or top.
+        weight_path: If not none, these weights will be loaded.
+        return_tensor: Whether to return the network as tensor or as model (if true, weights will not be loaded).
+        classes: By default the number of classes are 1000 (ImageNet). Only important include_top=True.
+        classifier_activation: By default softmax (ImageNet). Only important include_top=True.
+
+    Returns:
+        The CNN architecture as `tf.keras.model` or as `tf.keras.layers`.
+    """
 
     if input_tensor is None:
         input_tensor = tf.keras.layers.Input(shape=(224,224,3))

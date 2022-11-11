@@ -21,7 +21,7 @@ class cfg:
     baseurl="http://tum4.icaml.org" # note it does not end with /
     weight_store="./tmp"
     ds_store="./tmp"
-    model_name="vgg16_vitis"
+    model_name="densenet121_vitis"
 
 
 def train_model(model):
@@ -207,7 +207,7 @@ class TestCNN(unittest.TestCase):
         conv.load_weights(self.w_notop)
         new_w = conv.get_weights()
 
-        self.assertFalse(print(np.array_equal(old_w, new_w)), "Weights not loaded!")
+        self.assertFalse((np.array_equal(old_w, new_w)), "Weights not loaded!")
 
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dense(1000, activation="softmax", name="predictions")(x)
@@ -236,7 +236,7 @@ class TestCNN(unittest.TestCase):
         conv.load_weights(self.w_top)
         new_w = conv.get_weights()
 
-        self.assertFalse(print(np.array_equal(old_w, new_w)), "Weights not loaded!")
+        self.assertFalse((np.array_equal(old_w, new_w)), "Weights not loaded!")
 
         model = tf.keras.Model(new_inputs, x, name="TestModel")
         prediction = train_model(model)
@@ -266,7 +266,7 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_with_w_with_top_sequential(self):
-        """Test #1 to test the functionality of the neural network
+        """Test #8 to test the functionality of the neural network
 
         Config:
         -------

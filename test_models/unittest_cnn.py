@@ -11,27 +11,25 @@ import urllib.request
 import tensorflow as tf
 from pathlib import Path
 from yaml import safe_load, YAMLError
+from utils import model_load
 
 
 class cfg:
+    """
+    Configuration for the test.
+    """
     baseurl="http://tum4.icaml.org" # note it does not end with /
     weight_store="./tmp"
     ds_store="./tmp"
     model_name="vgg16_vitis"
 
 
-def model_load(x):
-    modulename = x.split(".")[0]
-
-    spec = importlib.util.spec_from_file_location(modulename, "models/%s" % (x))
-    mod = importlib.util.module_from_spec(spec)
-
-    sys.modules[modulename] = mod
-    spec.loader.exec_module(mod)
-    return mod.__dict__[modulename]  # this is the generator function
-
-
 def train_model(model):
+    """
+    Inferance of a given model using a image from ImageNet.
+    :param model: The Keras model.
+    :return: a list containing the prediction results (format depends on the type and activation of the last layer).
+    """
     img = tf.keras.preprocessing.image.load_img("testdata/Walking_tiger_female.jpg", target_size=(224, 224))
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_batch = np.expand_dims(img_array, axis=0)
@@ -39,8 +37,12 @@ def train_model(model):
 
 
 class TestCNN(unittest.TestCase):
+    """
+    Tests to validate a single convolutional neural network.
+    """
     @classmethod
     def setUpClass(cls):
+        """Gets all needed data and information for the tests."""
         try:
             with open("credentials.yaml", 'r') as stream:
                 cred = safe_load(stream)
@@ -59,6 +61,10 @@ class TestCNN(unittest.TestCase):
         cls.w_notop = "%s/imagenet_%s_notop.h5" % (cfg.weight_store, cfg.model_name.split("_")[0])
 
         def mlab_getweight(outfile):
+            """
+            Downloads and saves the weights for a model.
+            :param outfile: The location where the file will be saved.
+            """
             if os.path.exists(outfile):
                 print("Using cached file %s" % outfile)
             url = '%s/weights/%s' % (cfg.baseurl, outfile.split('/')[-1])
@@ -80,12 +86,19 @@ class TestCNN(unittest.TestCase):
                 # do something
                 print('Reason: ', e.reason, ", ", url)
                 exit()
-            return True
 
         mlab_getweight(cls.w_top)
         mlab_getweight(cls.w_notop)
 
     def test_no_w_no_top_tensor(self):
+        """Test #1 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: False
+        Top Layers: False
+        Network as Tensor: True
+        """
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             x = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=False, return_tensor=True, weight_path=None)
@@ -105,6 +118,15 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_no_w_with_top_tensor(self):
+        """Test #2 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: False
+        Top Layers: True
+        Network as Tensor: True
+        """
+
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             x = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=True, return_tensor=True, weight_path=None)
@@ -118,6 +140,14 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_no_w_no_top_sequential(self):
+        """Test #3 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: False
+        Top Layers: False
+        Network as Tensor: False
+        """
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             base_model = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=False, return_tensor=False, weight_path=None)
@@ -137,6 +167,14 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_no_w_with_top_sequential(self):
+        """Test #4 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: False
+        Top Layers: True
+        Network as Tensor: True
+        """
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             base_model = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=True, return_tensor=False, weight_path=None)
@@ -150,6 +188,14 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_with_w_no_top_tensor(self):
+        """Test #5 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: True
+        Top Layers: False
+        Network as Tensor: True
+        """
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             x = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=False, return_tensor=True, weight_path=None)
@@ -171,21 +217,40 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_with_w_with_top_tensor(self):
-        return
+        """Test #6 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: True
+        Top Layers: True
+        Network as Tensor: True
+        """
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
-            x = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=True, return_tensor=False,weight_path=None)
+            x = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=True, return_tensor=True,weight_path=None)
         except ValueError:
             self.fail("[test_cnn_no_w_no_top] model_load() raised ValueError unexpectedly!")
 
         conv = tf.keras.Model(new_inputs, x)
+        old_w = conv.get_weights()
         conv.load_weights(self.w_top)
+        new_w = conv.get_weights()
+
+        self.assertFalse(print(np.array_equal(old_w, new_w)), "Weights not loaded!")
 
         model = tf.keras.Model(new_inputs, x, name="TestModel")
         prediction = train_model(model)
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_with_w_no_top_sequential(self):
+        """Test #7 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: True
+        Top Layers: False
+        Network as Tensor: False
+        """
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             base_model = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=False, return_tensor=False,weight_path=self.w_notop)
@@ -201,6 +266,15 @@ class TestCNN(unittest.TestCase):
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
     def test_with_w_with_top_sequential(self):
+        """Test #1 to test the functionality of the neural network
+
+        Config:
+        -------
+        Weights: True
+        Top Layers: True
+        Network as Tensor: False
+        """
+
         new_inputs = tf.keras.layers.Input(shape=(224, 224, 3))
         try:
             base_model = model_load("%s.py" % cfg.model_name)(new_inputs, include_top=True, return_tensor=False,weight_path=self.w_top)

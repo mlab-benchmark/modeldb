@@ -284,5 +284,6 @@ class TestCNN(unittest.TestCase):
         prediction = train_model(base_model)
         self.assertEqual(len(prediction), 1000, "Test expected length of the output tensor!")
 
+
 if __name__=="__main__":
     pass

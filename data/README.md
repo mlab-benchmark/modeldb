@@ -2,6 +2,15 @@
 
 This page gives an overview of all datasets, which are actively used in this project. 
 
+## Get the Data
+All, datasets are publically available and can be downloaded from their official resources. After downloading, the data needs to be split into a test, train, and validation set. 
+
+We also provide an automated download of the already prepared and split datasets.
+
+```console
+user@hostnmame:~$ source ./getData.sh <custom output folder>
+```
+*Please note that we can offer this service is only for project members.*
 
 ## Overview
 
@@ -14,11 +23,9 @@ This page gives an overview of all datasets, which are actively used in this pro
 | RSI-CB256      | 256x256          | RGB      | 24,000  | 35       | C      | [Source](https://github.com/lehaifeng/RSI-CB), [P1](https://doi.org/10.3390/s20061594)                                                             |
 
 \* C - Classification, S - Segmentation, CD - Change Detection <br/>
-\** Multi-label 
+\** Multi-label
 
-
-## Detailes Descriptions
-
+## Detailed Dataset Descriptions
 
 ### EuroSAT
 The EuroSAT dataset is composed of aerial image tiles showing varying land-use classes in RGB colors as well as with multispectral bands.

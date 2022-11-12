@@ -20,27 +20,6 @@ This page gives an overview of all datasets, which are actively used in this pro
 ## Detailes Descriptions
 
 
-### BigEarthNet
-The BigEarthNet dataset is composed of largely cloud-free Sentinel-2 image patches (L2A) from 2018 labeled from the CORINE 2018 dataset.
-
-[comment]: <> (Hi Gabriel, ich denke, jedes Dataset sollte in einem Satz vorgestellt werden. Ohne Details, typischerweise mit Bild für Print ca. 500x500 pixel. Das muss aber nicht sofort sein.)
-
-*Key Features:*
-* Number of images:  590.326
-* Number of classes: 19 (new) / 43 (old)
-* Label type: multi label
-* geo-referenced: Yes
-* Image resolution:
-  + 120 × 120 pixels for 10m bands
-  + 60 × 60 pixels for 20m bands
-  + 20 × 20 pixels for 60m bands
-
-*License:*
-The BigEarthNet Archive is licensed under the Community Data License Agreement – Permissive, Version 1.0.
-
-[Source](http://bigearth.net/), [Paper no. 1](https://doi.org/10.1109/IGARSS.2019.8900532), [Paper no. 2](https://doi.org/10.1109/MGRS.2021.3089174)
-
-
 ### EuroSAT
 The EuroSAT dataset is composed of aerial image tiles showing varying land-use classes in RGB colors as well as with multispectral bands.
 

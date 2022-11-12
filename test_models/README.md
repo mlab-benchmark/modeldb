@@ -30,7 +30,7 @@ user@hostnmame:~$ python -m unittest  test_models/unittest_cnn.py
 ```
 *Run the script from the project root directory.*
 
-### Model Loading (without testcases)
+### Model Loading (without test cases)
 We alco provide a python script with tests if all models can be loaded.
 
 **Usage:**<br/>
@@ -39,7 +39,7 @@ user@hostnmame:~$ python test_models/unittest_load_cnn.py
 ```
 *Run the script from the project root directory.*
 
-### Functionality Test (without testcases)
+### Functionality Test (without test cases)
 We alco provide a python script with tests the inference of a model by first loading the model including ImageNet 
 weights, followed by predicting the class of a selected image from the dataset ImageNet. 
 

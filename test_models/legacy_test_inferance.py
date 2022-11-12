@@ -7,8 +7,6 @@ from tensorflow.keras.preprocessing import image
 from yaml import safe_load, YAMLError
 
 
-
-
 #    Gewichte: http://tum4.icaml.org/weights/
 #    Datensets: http://tum4.icaml.org/rs_data/
 

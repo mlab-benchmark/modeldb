@@ -21,6 +21,7 @@ def test_model_load(x):
 
 
 if __name__ == "__main__":
+
     # let us check for models available
     modx = [x for x in os.listdir("models") if x.endswith(".py")]
     for x in modx:

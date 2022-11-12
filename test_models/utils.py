@@ -4,6 +4,14 @@ import sys
 
 
 def model_load(x):
+    """Loads a convolutional neural network architecture by name.
+
+    Args:
+        x (string): the name of the CNN.
+
+    Returns:
+        The CNN architecture as generator function.
+    """
     modulename=x.split(".")[0]
 
     spec = importlib.util.spec_from_file_location(modulename, "models/%s" % (x))

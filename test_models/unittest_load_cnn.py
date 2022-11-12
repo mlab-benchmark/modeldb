@@ -10,8 +10,15 @@ import unittest
 import importlib.util
 
 
-
 def test_model_load(x):
+    """Imports a neural network architecure by name.
+
+    Args:
+        x: the name of the CNN architecture.
+
+    Returns:
+        The CNN architecture as generator function.
+    """
     modulename = x.split(".")[0]
 
     spec = importlib.util.spec_from_file_location(modulename, "models/%s" % (x))
@@ -28,11 +35,14 @@ class TestAutoLoad(unittest.TestCase):
     """
 
     def test_auto_load(self):
+        """
+        TEST #1: check if all models can be loaded by name.
+        """
         # let us check for models available
         modx = [x for x in os.listdir("models") if x.endswith(".py")]
         for x in modx:
             m = test_model_load(x)()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     pass

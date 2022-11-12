@@ -18,7 +18,6 @@ class cfg:
     """
     Configuration for the test.
     """
-    baseurl="http://tum4.icaml.org" # note it does not end with /
     weight_store="./tmp"
     ds_store="./tmp"
     model_name="densenet121_vitis"
@@ -52,6 +51,7 @@ class TestCNN(unittest.TestCase):
             exit()
 
         cfg.httpauth = (cred["User"], cred["Pwd"])
+        cfg.baseurl = cred["Url"]
 
         Path(cfg.weight_store).mkdir(parents=True, exist_ok=True)
         Path(cfg.weight_store).mkdir(parents=True, exist_ok=True)

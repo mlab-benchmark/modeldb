@@ -8,9 +8,13 @@ All, datasets are publically available and can be downloaded from their official
 We also provide an automated download of the already prepared and split datasets.
 
 ```console
+user@hostnmame:~$ # Script is located in the root directory of this project.
+user@hostnmame:~$ cd ..
 user@hostnmame:~$ source ./getData.sh <custom output folder>
 ```
 *Please note that we can offer this service is only for project members.*
+
+
 
 ## Overview
 

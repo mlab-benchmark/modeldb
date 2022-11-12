@@ -4,6 +4,7 @@ import os
 
 from utils import model_load
 from tensorflow.keras.preprocessing import image
+from yaml import safe_load, YAMLError
 
 
 
@@ -12,8 +13,6 @@ from tensorflow.keras.preprocessing import image
 #    Datensets: http://tum4.icaml.org/rs_data/
 
 class cfg:
-    baseurl = "http://tum4.icaml.org"  # note it does not end with /
-    httpauth = ("mlab", "geo$123")
     weight_store = "./tmp"
     ds_store = "./tmp"
 
@@ -60,6 +59,17 @@ def mlab_getweight(x):
 from matplotlib import pyplot as plt
 
 if __name__ == "__main__":
+    try:
+        with open("credentials.yaml", 'r') as stream:
+            cred = safe_load(stream)
+    except FileNotFoundError as e:
+        print(e)
+        print("Filed loading credentials for webpage", )
+        exit()
+
+    cfg.httpauth = (cred["User"], cred["Pwd"])
+    cfg.baseurl = cred["Url"]
+
     m = "imagenet-vgg19_vitis.h5"
     print("Downloading Weights %s" % (m))
     modelname = m.split(".")[0].split("-")[1]

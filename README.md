@@ -15,19 +15,19 @@ This repository is part of the project *Commercial off-the-shelf Inference Proce
 - **mobilenet_vitis**: Vitis AI capable version of VGG16 [Doc](description/mobilenet_vitis.md) [Src](description/mobilenet_vitis.py)
 -->
 
-| Name              | Architecture | Documentation                           | Source                             | Source Publication                              | Weights  |
-|-------------------|:------------:|-----------------------------------------|------------------------------------|-------------------------------------------------|:--------:|
-| vgg16_vitis       |    VGG16     | [Doc](description/vgg16_vitis.md)       | [Src](models/vgg16_vitis.py)       | [Paper](https://arxiv.org/abs/1409.1556)        | ImageNet |
-| vgg19_vitis       |    VGG19     | [Doc](description/vgg19_vitis.md)       | [Src](models/vgg19_vitis.py)       | [Paper](https://arxiv.org/abs/1409.1556)        | ImageNet |
-| resnet34_vitis    |   ResNet34   | [Doc](description/resnet34_vitis.md)    | [Src](models/resnet34_vitis.py)    | [Paper](https://doi.org/10.1109/CVPR.2016.90)   |          |
-| resnet50_vitis    |   ResNet50   | [Doc](description/resnet50_vitis.md)    | [Src](models/resnet50_vitis.py)    | [Paper](https://doi.org/10.1109/CVPR.2016.90)   | ImageNet |
-| resnet101_vitis   |  ResNet101   | [Doc](description/resnet101_vitis.md)   | [Src](models/resnet101_vitis.py)   | [Paper](https://doi.org/10.1109/CVPR.2016.90)   | ImageNet |
-| resnet152_vitis   |  ResNet152   | [Doc](description/resnet152_vitis.md)   | [Src](models/resnet152_vitis.py)   | [Paper](https://doi.org/10.1109/CVPR.2016.90)   | ImageNet |
-| densenet121_vitis | DenseNet121  | [Doc](description/densenet121_vitis.md) | [Src](models/densenet121_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  | ImageNet |
-| densenet161_vitis | DenseNet161  | [Doc](description/densenet161_vitis.md) | [Src](models/densenet161_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  |          |
-| densenet161_vitis | DenseNet169  | [Doc](description/densenet161_vitis.md) | [Src](models/densenet161_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  | ImageNet |
-| densenet201_vitis | DenseNet201  | [Doc](description/densenet201_vitis.md) | [Src](models/densenet201_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  | ImageNet |
-| mobilenet_vitis   |  MobileNet   | [Doc](description/mobilenet_vitis.md)   | [Src](models/mobilenet_vitis.py)   | [Paper](https://arxiv.org/abs/1704.04861)       | ImageNet |
+| Name              | Architecture | Documentation                           | Source                             | Source Publication                              |
+|-------------------|:------------:|-----------------------------------------|------------------------------------|-------------------------------------------------|
+| vgg16_vitis       |    VGG16     | [Doc](description/vgg16_vitis.md)       | [Src](models/vgg16_vitis.py)       | [Paper](https://arxiv.org/abs/1409.1556)        |
+| vgg19_vitis       |    VGG19     | [Doc](description/vgg19_vitis.md)       | [Src](models/vgg19_vitis.py)       | [Paper](https://arxiv.org/abs/1409.1556)        |
+| resnet34_vitis    |   ResNet34   | [Doc](description/resnet34_vitis.md)    | [Src](models/resnet34_vitis.py)    | [Paper](https://doi.org/10.1109/CVPR.2016.90)   |
+| resnet50_vitis    |   ResNet50   | [Doc](description/resnet50_vitis.md)    | [Src](models/resnet50_vitis.py)    | [Paper](https://doi.org/10.1109/CVPR.2016.90)   |
+| resnet101_vitis   |  ResNet101   | [Doc](description/resnet101_vitis.md)   | [Src](models/resnet101_vitis.py)   | [Paper](https://doi.org/10.1109/CVPR.2016.90)   |
+| resnet152_vitis   |  ResNet152   | [Doc](description/resnet152_vitis.md)   | [Src](models/resnet152_vitis.py)   | [Paper](https://doi.org/10.1109/CVPR.2016.90)   |
+| densenet121_vitis | DenseNet121  | [Doc](description/densenet121_vitis.md) | [Src](models/densenet121_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  |
+| densenet161_vitis | DenseNet161  | [Doc](description/densenet161_vitis.md) | [Src](models/densenet161_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  |
+| densenet161_vitis | DenseNet169  | [Doc](description/densenet161_vitis.md) | [Src](models/densenet161_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  |
+| densenet201_vitis | DenseNet201  | [Doc](description/densenet201_vitis.md) | [Src](models/densenet201_vitis.py) | [Paper](https://doi.org/10.1109/CVPR.2017.243)  |
+| mobilenet_vitis   |  MobileNet   | [Doc](description/mobilenet_vitis.md)   | [Src](models/mobilenet_vitis.py)   | [Paper](https://arxiv.org/abs/1704.04861)       |
 
 **Hardware:** All models are FPGA ready and are tested on an [AMD Xilinx ZCU102](https://www.xilinx.com/products/boards-and-kits/ek-u1-zcu102-g.html) using [VitisAI](https://github.com/Xilinx/Vitis-AI).
 

@@ -49,5 +49,8 @@ model = tf.keras.Model(new_inputs, x, name="TestModel")
 # [...]
 ```
 
+### Opening an issue
+You can also post bug reports and requests in [GitHub issues](https://github.com/tum-bgd/mlab_modeldb/issues).
+
 ### License
 [Apache License 2.0](LICENSE)

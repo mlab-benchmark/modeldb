@@ -40,5 +40,5 @@ models.densenet169_vitis.densenet169_vitis(
 The CNN architecture as `tf.keras.model` if `return_tensor=False`, otherwise as `tf.keras.layers`.
 
 ## References:
-[1] G. Huang, Z. Liu, L. Van Der Maaten and K. Q. Weinberger, "[Densely Connected Convolutional Networks](https://doi.org/10.1109/CVPR.2017.243)," 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 2261-2269, doi: 10.1109/CVPR.2017.243.
+[1] G. Huang, Z. Liu, L. Van Der Maaten and K. Q. Weinberger, "[Densely Connected Convolutional Networks](https://doi.org/10.1109/CVPR.2017.243)," 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 2261-2269, doi: 10.1109/CVPR.2017.243.<br/>
 [2]	O. Russakovsky et al., “[ImageNet Large Scale Visual Recognition Challenge](https://arxiv.org/abs/1409.0575),” International Journal of Computer Vision (IJCV), vol. 115, no. 3, pp. 211–252, 2015, doi: 10.1007/s11263-015-0816-y.

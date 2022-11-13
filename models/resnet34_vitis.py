@@ -72,8 +72,8 @@ def resnet34_vitis(input_tensor=None, include_top=True, weight_path=None, return
         input_tensor: optional keras layer, like an input tensor.
         include_top: whether to include the top layers or top.
         weight_path: If not none, these weights will be loaded.
-        return_tensor: Whether to return the network as tensor or as model (if true, weights will not be loaded).
-        classes: By default the number of classes are 1000 (ImageNet). Only important include_top=True.
+        return_tensor: Whether to return the network as tensor or as `tf.keras.model` (if true, weights will not be loaded).
+        classes: By default the number of classes are 1000 (ImageNet). Only important `include_top=True`.
         classifier_activation: By default softmax (ImageNet). Only important include_top=True.
 
     Returns:

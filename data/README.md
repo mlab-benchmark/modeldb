@@ -12,7 +12,18 @@ user@hostnmame:~$ # Script is located in the root directory of this project.
 user@hostnmame:~$ cd ..
 user@hostnmame:~$ source ./getData.sh <custom output folder>
 ```
-*Please note that we can offer this service is only for project members.*
+*Please note that we can offer this service of an automated download only for project members. If you have are not a project member, please manually download the data.*
+
+In order to automatically download the data, some credentials are necessary (user, password, and url). These credentials need to be placed into a file `credentials.yaml` in the root directory of this project.
+
+An example for this file is `credentials.yaml.example`:
+
+```console
+# Do not quote the strings
+User: MyUsername
+Pwd: MyPassword
+Url: http://my.url.com
+```
 
 
 

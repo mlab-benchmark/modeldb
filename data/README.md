@@ -3,7 +3,7 @@
 This page gives an overview of all datasets, which are actively used in this project. 
 
 ## Get the Data
-All, datasets are publically available and can be downloaded from their official resources. After downloading, the data needs to be split into a test, train, and validation set. 
+All, datasets are publicly available and can be downloaded from their official resources. After downloading, the data needs to be split into a test, train, and validation set. 
 
 We also provide an automated download of the already prepared and split datasets.
 
@@ -12,9 +12,9 @@ user@hostnmame:~$ # Script is located in the root directory of this project.
 user@hostnmame:~$ cd ..
 user@hostnmame:~$ source ./getData.sh <custom output folder>
 ```
-*Please note that we can offer this service of an automated download only for project members. If you have are not a project member, please manually download the data.*
+*Please note that we can offer this service of an automated download only for project members. If you are not a project member, please manually download the data.*
 
-In order to automatically download the data, some credentials are necessary (user, password, and url). These credentials need to be placed into a file `credentials.yaml` in the root directory of this project.
+In order to automatically download the data, some credentials are necessary (user, password, and url). These credentials need to be placed into a file called  `credentials.yaml` in the root directory of this project.
 
 An example for this file is `credentials.yaml.example`:
 
@@ -27,7 +27,7 @@ Url: http://my.url.com
 
 
 
-## Overview
+## Overview of the Data
 
 | Name           | Resolution       | Channels | #Images | #Classes | Task\* | Ref.                                                                                                                                               |
 |----------------|------------------|----------|---------|----------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -40,7 +40,7 @@ Url: http://my.url.com
 \* C - Classification, S - Segmentation, CD - Change Detection <br/>
 \** Multi-label
 
-## Detailed Dataset Descriptions
+## Detailed Descriptions of the Datasets
 
 ### EuroSAT
 The EuroSAT dataset is composed of aerial image tiles showing varying land-use classes in RGB colors as well as with multispectral bands.

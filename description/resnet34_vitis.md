@@ -1,6 +1,6 @@
 # CNN Architecture ResNet34
 
-This is a re-implementation of ResNet50 as described [1] (Configuration: option B has been used) changed to fulfill
+This is a re-implementation of ResNet34 as described [1] (Configuration: option B has been used) changed to fulfill
 hardware constraints of the Vitis AI framework for inference on Xilinx FPGAs.
 
 Pretrained weights are available from the model database as follows:

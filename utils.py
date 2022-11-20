@@ -4,6 +4,14 @@ import sys
 
 
 def model_load(x):
+    """Loads a model from the model library.
+
+    Args:
+        x (string): The name of the model
+
+    Returns:
+        The CNN architecture as generator function.
+    """
     modulename=x.split(".")[0]
 
     spec = importlib.util.spec_from_file_location(modulename, "models/%s" % (x))

@@ -1,24 +1,27 @@
-# CNN Architecture ResNet152
+# Architecture DenseNet201
 
-This is a re-implementation of ResNet152 as described [1] (Configuration: option B has been used) changed to fulfill
-hardware constraints of the Vitis AI framework for inference on Xilinx FPGAs.
+This is a re-implementation of DenseNet201 as [1] changed to fulfill hardware constraints of the Vitis AI framework for inference on Xilinx FPGAs.
 
 Pretrained weights are available from the model database as follows:
 
-- **ImageNet (with top layers)**: imagenet_resnet152.h5
-- **ImageNet (without top layers)**: imagenet_resnet152_notop.h5
+- **ImageNet (with top layers)**: imagenet_densenet201.h5
+- **ImageNet (without top layers)**: imagenet_densenet201_notop.h5
 
-**Source file**: `/models/resnet152_vitis.py`
+**Source file**: `/models/densenet201_vitis.py`
+
 ## Usage:
 
 ```python
-models.resnet152_vitis.resnet152_vitis(
+models.densenet201_vitis.densenet201_vitis(
     input_tensor=None, 
     include_top=True, 
     weight_path=None, 
     return_tensor=False, 
     classes=1000, 
-    classifier_activation="softmax"
+    classifier_activation="softmax",
+    grow_rate=32, 
+    compression=0.5, 
+    kernel_size_first_layer=(7,7)
 )
 ```
 
@@ -29,11 +32,13 @@ models.resnet152_vitis.resnet152_vitis(
 * **return_tensor**: Whether to return the network as tensor or as `tf.keras.model` (if true, weights will not be loaded). 
 * **classes**: By default the number of classes are 1000 (ImageNet). Only important `include_top=True`. 
 * **classifier_activation**: By default softmax (ImageNet). Only important if `include_top=True`.
+* **grow_rate**: Graw rate of the network, by default 32. 
+* **compression**: Compression factor of the transition layer blocks, by default 0.5 
+* **kernel_size_first_layer**: Kernel size of the first layer, by default (7,7)
 
 #### Returns:
 The CNN architecture as `tf.keras.model` if `return_tensor=False`, otherwise as `tf.keras.layers`.
 
 ## References:
-[1] K. He, X. Zhang, S. Ren and J. Sun, "[Deep Residual Learning for Image Recognition](https://doi.org/10.1109/CVPR.2016.90)," 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016, pp. 770-778, doi: 10.1109/CVPR.2016.90.<br/>
+[1] G. Huang, Z. Liu, L. Van Der Maaten and K. Q. Weinberger, "[Densely Connected Convolutional Networks](https://doi.org/10.1109/CVPR.2017.243)," 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017, pp. 2261-2269, doi: 10.1109/CVPR.2017.243.<br/>
 [2]	O. Russakovsky et al., “[ImageNet Large Scale Visual Recognition Challenge](https://arxiv.org/abs/1409.0575),” International Journal of Computer Vision (IJCV), vol. 115, no. 3, pp. 211–252, 2015, doi: 10.1007/s11263-015-0816-y.
-

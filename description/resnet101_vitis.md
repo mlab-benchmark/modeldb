@@ -1,18 +1,19 @@
-# CNN Architecture ResNet152
+# CNN Architecture ResNet101
 
-This is a re-implementation of ResNet152 as described [1] (Configuration: option B has been used) changed to fulfill
+This is a re-implementation of ResNet101 as described [1] (Configuration: option B has been used) changed to fulfill
 hardware constraints of the Vitis AI framework for inference on Xilinx FPGAs.
 
 Pretrained weights are available from the model database as follows:
 
-- **ImageNet (with top layers)**: imagenet_resnet152.h5
-- **ImageNet (without top layers)**: imagenet_resnet152_notop.h5
+- **ImageNet (with top layers)**: imagenet_resnet101.h5
+- **ImageNet (without top layers)**: imagenet_resnet101_notop.h5
 
-**Source file**: `/models/resnet152_vitis.py`
+**Source file**: `/models/resnet101_vitis.py`
+
 ## Usage:
 
 ```python
-models.resnet152_vitis.resnet152_vitis(
+models.resnet101_vitis.resnet101_vitis(
     input_tensor=None, 
     include_top=True, 
     weight_path=None, 
@@ -36,4 +37,3 @@ The CNN architecture as `tf.keras.model` if `return_tensor=False`, otherwise as 
 ## References:
 [1] K. He, X. Zhang, S. Ren and J. Sun, "[Deep Residual Learning for Image Recognition](https://doi.org/10.1109/CVPR.2016.90)," 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016, pp. 770-778, doi: 10.1109/CVPR.2016.90.<br/>
 [2]	O. Russakovsky et al., “[ImageNet Large Scale Visual Recognition Challenge](https://arxiv.org/abs/1409.0575),” International Journal of Computer Vision (IJCV), vol. 115, no. 3, pp. 211–252, 2015, doi: 10.1007/s11263-015-0816-y.
-
